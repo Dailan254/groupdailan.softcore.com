@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Softcore University - Faculty of Engineering</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Global Styles */
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #ff9900;
+        }
+        
+        nav a.active {
+            color: #ff9900;
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ff9900;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Main Content Styles */
+        main {
+            min-height: calc(100vh - 160px);
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff9900;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e68a00;
+        }
+        
+        .page-title {
+            color: #003366;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #003366;
+        }
+        
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .card h3 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+        }
+        
+        .program {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-left: 4px solid #ff9900;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .program h4 {
+            color: #003366;
+            margin-bottom: 0.5rem;
+        }
+        
+        .program p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Map Styles */
+        .map-container {
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ff9900;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: #ff9900;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                gap: 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                padding: 0.8rem 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Page Transitions */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/50x50?text=SU" alt="Softcore University Logo">
+            <div class="logo-text">
+                <h1>Faculty of Engineering</h1>
+                <p>Softcore University</p>
+            </div>
+        </div>
+        
+        <button class="menu-toggle">☰</button>
+        
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="programs">Programs</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#" class="nav-link" data-page="administration">Administration</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h2>Welcome to the Faculty of Engineering</h2>
+                <p>Excellence in engineering education, research, and innovation for a better tomorrow</p>
+                <a href="#" class="btn nav-link" data-page="programs">Explore Our Programs</a>
+            </div>
+            
+            <div class="card">
+                <h3 class="page-title">Latest News & Announcements</h3>
+                
+                <div class="program">
+                    <h4>New Advanced Engineering Lab Inaugurated</h4>
+                    <p>The Faculty of Engineering proudly announces the opening of our new state-of-the-art research laboratory, equipped with cutting-edge technology for interdisciplinary research.</p>
+                    <p><strong>Date:</strong> October 15, 2023</p>
+                </div>
+                
+                <div class="program">
+                    <h4>Annual Engineering Symposium 2023</h4>
+                    <p>Join us for our flagship event featuring keynote speakers from industry leaders, research presentations, and networking opportunities for students and professionals.</p>
+                    <p><strong>Date:</strong> November 20-22, 2023</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Why Choose Our Faculty?</h3>
+                <ul style="list-style-position: inside; margin-left: 1rem;">
+                    <li>Industry-aligned curriculum with hands-on learning</li>
+                    <li>Experienced faculty with industry and academic expertise</li>
+                    <li>State-of-the-art laboratories and research facilities</li>
+                    <li>Strong industry partnerships for internships and placements</li>
+                    <li>Vibrant student community with technical clubs and chapters</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Programs Page -->
+        <section id="programs" class="page">
+            <h2 class="page-title">Our Engineering Programs</h2>
+            
+            <div class="card">
+                <h3>Mechanical Engineering</h3>
+                <div class="program">
+                    <h4>Bachelor of Science in Mechanical Engineering</h4>
+                    <p>A comprehensive 4-year program covering thermodynamics, fluid mechanics, machine design, and manufacturing processes.</p>
+                    <a href="#" class="btn">View Curriculum</a>
+                </div>
+                
+                <div class="program">
+                    <h4>Master of Science in Mechanical Engineering</h4>
+                    <p>Advanced studies with specializations in Energy Systems, Robotics, or Materials Engineering.</p>
+                    <a href="#" class="btn">View Curriculum</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Civil Engineering</h3>
+                <div class="program">
+                    <h4>Bachelor of Science in Civil Engineering</h4>
+                    <p>4-year program focusing on structural engineering, transportation, geotechnics, and construction management.</p>
+                    <a href="#" class="btn">View Curriculum</a>
+                </div>
+                
+                <div class="program">
+                    <h4>Master of Science in Civil Engineering</h4>
+                    <p>Specialize in Structural Engineering, Water Resources, or Environmental Engineering.</p>
+                    <a href="#" class="btn">View Curriculum</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Electrical Engineering</h3>
+                <div class="program">
+                    <h4>Bachelor of Technology in Electrical and Electronic Engineering</h4>
+                    <p>4-year program emphasizing practical applications in power systems, electronics, and control systems.</p>
+                    <a href="#" class="btn">View Curriculum</a>
+                </div>
+                
+                <div class="program">
+                    <h4>Bachelor of Engineering in Electrical and Electronic Engineering</h4>
+                    <p>5-year program with deeper theoretical foundations and research components.</p>
+                    <a href="#" class="btn">View Curriculum</a>
+                </div>
+                
+                <div class="program">
+                    <h4>Bachelor of Engineering in Electrical and Communication Engineering</h4>
+                    <p>5-year program combining electrical engineering with telecommunications and signal processing.</p>
+                    <a href="#" class="btn">View Curriculum</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <h2 class="page-title">About the Faculty</h2>
+            
+            <div class="card">
+                <h3>Our History</h3>
+                <p>Established in 1995, the Faculty of Engineering at Softcore University has grown to become one of the leading engineering institutions in the region. We began with just 50 students and have since graduated over 5,000 engineers who are making significant contributions across various industries.</p>
+            </div>
+            
+            <div class="card">
+                <h3>Mission & Vision</h3>
+                <div class="program">
+                    <h4>Mission</h4>
+                    <p>To provide world-class engineering education through innovative teaching, cutting-edge research, and industry collaboration, preparing graduates to solve complex global challenges.</p>
+                </div>
+                
+                <div class="program">
+                    <h4>Vision</h4>
+                    <p>To be recognized as a center of excellence in engineering education and research, producing leaders who will drive technological innovation and sustainable development.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Our Facilities</h3>
+                <ul style="list-style-position: inside; margin-left: 1rem; margin-bottom: 1rem;">
+                    <li>Advanced Computer-Aided Design (CAD) Labs</li>
+                    <li>Renewable Energy Research Center</li>
+                    <li>Materials Testing Laboratory</li>
+                    <li>Hydraulics and Water Resources Lab</li>
+                    <li>Robotics and Automation Center</li>
+                    <li>Electronics and Communication Labs</li>
+                </ul>
+                <a href="#" class="btn nav-link" data-page="contact">Schedule a Visit</a>
+            </div>
+            
+            <div class="card">
+                <h3>Accreditations</h3>
+                <p>Our programs are accredited by:</p>
+                <ul style="list-style-position: inside; margin-left: 1rem;">
+                    <li>Engineering Accreditation Commission (EAC)</li>
+                    <li>National Council for Higher Education</li>
+                    <li>International Engineering Alliance</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Administration Page -->
+        <section id="administration" class="page">
+            <h2 class="page-title">University Administration</h2>
+            
+            <div class="card">
+                <h3>University Leadership</h3>
+                <div class="program">
+                    <h4>Office of the Vice Chancellor</h4>
+                    <p><strong>Prof. Jane Muthoni</strong><br>
+                    Vice Chancellor<br>
+                    Email: vc@softcore.ac.ke</p>
+                </div>
+                
+                <div class="program">
+                    <h4>Finance Department</h4>
+                    <p><strong>Mr. David Ochieng</strong><br>
+                    Director of Finance<br>
+                    Email: finance@softcore.ac.ke</p>
+                </div>
+                
+                <div class="program">
+                    <h4>Human Resource Department</h4>
+                    <p><strong>Mrs. Susan Wambui</strong><br>
+                    HR Director<br>
+                    Email: hr@softcore.ac.ke</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Faculty Leadership</h3>
+                <div class="program">
+                    <h4>Dean of Engineering</h4>
+                    <p><strong>Prof. Michael Otieno</strong><br>
+                    Email: dean.engineering@softcore.ac.ke</p>
+                </div>
+                
+                <div class="program">
+                    <h4>Department Heads</h4>
+                    <p><strong>Mechanical Engineering:</strong> Dr. Robert Mwangi<br>
+                    <strong>Civil Engineering:</strong> Dr. Elizabeth Atieno<br>
+                    <strong>Electrical Engineering:</strong> Dr. Paul Omollo</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Faculty Committees</h3>
+                <ul style="list-style-position: inside; margin-left: 1rem;">
+                    <li><strong>Academic Affairs Committee:</strong> Oversees curriculum development and academic standards</li>
+                    <li><strong>Research Committee:</strong> Coordinates research activities and funding</li>
+                    <li><strong>Student Welfare Committee:</strong> Addresses student concerns and welfare</li>
+                    <li><strong>Infrastructure Committee:</strong> Manages facilities and equipment</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page">
+            <h2 class="page-title">Contact Us</h2>
+            
+            <div class="card">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3>Contact Information</h3>
+                        <div class="program">
+                            <h4>Address</h4>
+                            <p>Faculty of Engineering<br>
+                            Softcore University<br>
+                            Mukoma Road, Nairobi</p>
+                            
+                            <h4 style="margin-top: 1rem;">Postal Address</h4>
+                            <p>P.O BOX 54998-00200<br>
+                            Nairobi, Kenya</p>
+                        </div>
+                        
+                        <div class="program">
+                            <h4>Email & Phone</h4>
+                            <p><strong>General Inquiries:</strong><br>
+                            engineering@softcore.ac.ke<br>
+                            +254 20 123 4567</p>
+                            
+                            <p><strong>Admissions Office:</strong><br>
+                            admissions.engineering@softcore.ac.ke<br>
+                            +254 20 123 4568</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3>Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="department">Department (Optional)</label>
+                                <select id="department" name="department">
+                                    <option value="">Select Department</option>
+                                    <option value="mechanical">Mechanical Engineering</option>
+                                    <option value="civil">Civil Engineering</option>
+                                    <option value="electrical">Electrical Engineering</option>
+                                    <option value="administration">Administration</option>
+                                    <option value="admissions">Admissions</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Location Map</h3>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8085599999996!2d36.82154531575398!3d-1.2923858359799998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d5b5f5b5f5%3A0x5f5f5f5f5f5f5f5f!2sSoftcore%20University!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Office Hours</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="program">
+                        <h4>Administrative Offices</h4>
+                        <p>Monday - Friday: 8:00 AM - 5:00 PM<br>
+                        Saturday: 9:00 AM - 1:00 PM<br>
+                        Sunday: Closed</p>
+                    </div>
+                    
+                    <div class="program">
+                        <h4>Admissions Office</h4>
+                        <p>Monday - Friday: 8:30 AM - 4:30 PM<br>
+                        Saturday: 10:00 AM - 2:00 PM<br>
+                        Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="programs">Programs</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                    <li><a href="#" class="nav-link" data-page="administration">Administration</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Academic Departments</h3>
+                <ul>
+                    <li>Mechanical Engineering</li>
+                    <li>Civil Engineering</li>
+                    <li>Electrical Engineering</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Softcore University<br>
+                Mukoma Road, Nairobi<br>
+                P.O BOX 54998-00200<br>
+                Phone: +254 20 1234567<br>
+                Email: info@softcore.ac.ke</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Softcore University - Faculty of Engineering. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav ul');
+            
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('show');
+            });
+            
+            // Page Navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the target page
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Hide all pages
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show target page
+                    document.getElementById(targetPage).classList.add('active');
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    nav.classList.remove('show');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Here you would typically send the data to a server
+                    // For this example, we'll just show an alert
+                    alert(`Thank you, ${name}! Your message has been received. We'll contact you at ${email} soon.`);
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
